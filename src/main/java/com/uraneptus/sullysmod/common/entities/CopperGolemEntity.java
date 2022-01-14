@@ -23,9 +23,9 @@ import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
-public class CopperGolemEntity extends AbstractGolem implements IAnimatable {
+public class CopperGolemEntity extends AbstractGolem /*implements IAnimatable*/ {
     public static final EntityDataAccessor<Integer> OXIDIZATION = SynchedEntityData.defineId(CopperGolemEntity.class, EntityDataSerializers.INT);
-    private final AnimationFactory factory = new AnimationFactory(this);
+    //private final AnimationFactory factory = new AnimationFactory(this);
     int cachedState;
     int cachedGameTime;
     boolean isStatue;
@@ -112,18 +112,18 @@ public class CopperGolemEntity extends AbstractGolem implements IAnimatable {
     }
 
 
-    public <E extends IAnimatable> PlayState setAnimation(AnimationEvent<E> event) {
+    /*public <E extends IAnimatable> PlayState setAnimation(AnimationEvent<E> event) {
         boolean onGround = isOnGround();
         if (!((double)animationSpeed < 0.1D) && onGround && !isStatue) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.copper_golem.walking", true));
             return PlayState.CONTINUE;
-        } /*else {
+        } else {
             //System.out.println("Flag is true. Animation should be called");
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.copper_golem.head_spin", false));
             //this.setHeadSpinDelay(200);
             //flag = false;
             return PlayState.CONTINUE;
-        }*/
+        }
         return PlayState.STOP;
     }
 
@@ -136,7 +136,7 @@ public class CopperGolemEntity extends AbstractGolem implements IAnimatable {
     @Override
     public AnimationFactory getFactory() {
         return this.factory;
-    }
+    }*/
 
 
     private void setOxidization(int state) {

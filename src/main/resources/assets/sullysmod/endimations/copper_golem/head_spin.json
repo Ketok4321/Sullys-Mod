@@ -1,0 +1,29 @@
+{
+	"length": 0.6,
+	"parts": {
+		"head": {
+			"rotation": [
+				{
+					"time": 0,
+					"transform": {
+						"vector": [0, 0, 0]
+					},
+					"interpolation": {
+						"type": "linear"
+					}
+				},
+				{
+					"time": 0.6,
+					"transform": {
+						"vector": [0, -360, 0],
+						"easing": "easeInElastic",
+						"easingArgs": [0.5]
+					},
+					"interpolation": {
+						"type": "linear"
+					}
+				}
+			]
+		}
+	}
+}

@@ -2,6 +2,7 @@ package com.uraneptus.sullysmod.client;
 
 import com.uraneptus.sullysmod.SullysMod;
 import com.uraneptus.sullysmod.client.renderer.entities.CopperGolemRenderer;
+import com.uraneptus.sullysmod.client.renderer.entities.model.CopperGolemModel;
 import com.uraneptus.sullysmod.core.registry.SMEntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -16,8 +17,8 @@ public class RendererRegistry {
         event.registerEntityRenderer(SMEntityType.COPPER_GOLEM.get(), CopperGolemRenderer::new);
     }
 
-    /*@SubscribeEvent
+    @SubscribeEvent
     public static void registerLayerLocation(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(CopperGolemModel.LAYER_LOCATION, CopperGolemModel::createBodyLayer);
-    }*/
+    }
 }
