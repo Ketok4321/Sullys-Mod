@@ -7,10 +7,10 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
 
-public class CopperGolemRenderer extends MobRenderer<CopperGolemEntity, CopperGolemModel> {
+public class CopperGolemRenderer extends MobRenderer<CopperGolemEntity, CopperGolemModel<CopperGolemEntity>> {
 
     public CopperGolemRenderer(EntityRendererProvider.Context context) {
-        super(context, new CopperGolemModel(context.bakeLayer(CopperGolemModel.LAYER_LOCATION)), 0.5F);
+        super(context, new CopperGolemModel<>(context.bakeLayer(CopperGolemModel.LAYER_LOCATION)), 0.5F);
     }
 
     @Override

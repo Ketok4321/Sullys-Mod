@@ -14,6 +14,8 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.function.Supplier;
+
 
 
 /*public class CopperGolemModel extends AnimatedGeoModel<CopperGolemEntity> {
@@ -36,17 +38,16 @@ import net.minecraft.resources.ResourceLocation;
 }*/
 
 // Made by Sully using Blockbench 4.0.2
-public class CopperGolemModel extends EntityModel<CopperGolemEntity> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
+public class CopperGolemModel <T extends CopperGolemEntity> extends EntityModel<T> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(SullysMod.MOD_ID, "copper_golem"), "main");
-
-	private static final Endimation WALKING = Blueprint.ENDIMATION_LOADER.getEndimation(new ResourceLocation(SullysMod.MOD_ID, "walking"));
-	private final ModelPart root;
+	private static final Supplier<Endimation> WALKING = () -> Blueprint.ENDIMATION_LOADER.getEndimation(new ResourceLocation(SullysMod.MOD_ID, "walking"));
 	private final Endimator endimator;
+	private final ModelPart root;
+
 
 	public CopperGolemModel(ModelPart root) {
 		this.root = root.getChild("root");
-		this.endimator = Endimator.compile(root);
+		this.endimator = Endimator.shortCompile(root);
 	}
 
 	public static LayerDefinition createBodyLayer() {
@@ -74,14 +75,14 @@ public class CopperGolemModel extends EntityModel<CopperGolemEntity> {
 	}
 
 	@Override
-	public void setupAnim(CopperGolemEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		assert WALKING != null;
-		float length = WALKING.getLength();
+	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+		assert WALKING.get() != null;
+		float length = WALKING.get().getLength();
 		float adjustedLimbSwingAmount = 4.0F * limbSwingAmount / length;
 		if (adjustedLimbSwingAmount > 1.0F) {
 			adjustedLimbSwingAmount = 1.0F;
 		}
-		this.endimator.apply(WALKING, computeWalkTime(limbSwing, length), adjustedLimbSwingAmount, Endimator.ResetMode.ALL);
+		this.endimator.apply(WALKING.get(), computeWalkTime(limbSwing, length), adjustedLimbSwingAmount, Endimator.ResetMode.ALL);
 	}
 
 	@Override
